@@ -1,0 +1,5 @@
+# I don't need binary files, or text editor's backup.
+
+*.out
+*.bin
+*.*~
