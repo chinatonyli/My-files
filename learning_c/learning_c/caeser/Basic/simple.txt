@@ -1,0 +1,32 @@
+Meet the New Boss: Big Data 
+Companies Trade In Hunch-Based Hiring for Computer Modeling
+
+When looking for workers to staff its call centers, Xerox Corp. XRX +2.44%used to pay lots of attention to applicants who had done the job before. Then, a computer program told the printer and outsourcing company that experience doesn't matter.
+
+The software said that what does matter in a good call-center worker¡ªone who won't quit before the company recoups its $5,000 investment in training¡ªis personality. Data show that creative types tend to stick around for the necessary six months. Inquisitive people often don't. 
+
+Laszlo Bock, a senior vice president at Google Inc. GOOG +1.27%and an Evolv director, said software will supplement, if not supplant, many of the personnel decisions long made by instinct and intuition. "The initial thing companies like Evolv are looking at is people as they get hired, but over the years this can help companies pick who to advance, who to promote," he said. "Even at the best companies there's still a lot of guessing."
+
+It isn't just big companies that are turning to software for hiring help. Richfield Management LLC, a Flint, Mich., waste-disposal firm that employs 200 garbage collectors, was looking for ways to screen out applicants who were likely to get hurt and abuse workers' compensation.
+
+About a year and a half ago, Richfield turned to an online test developed by a small firm called Exemplar Research Group. It asks applicants to pick between statements like "When I'm working for a company I take pride in making it as profitable as possible" and "I'm only concerned with how well I can do financially in my job," then rate how strongly they agree or disagree.
+
+The goal is to gauge an applicant's emotional stability, work ethic and attitude toward drug and alcohol. Those who score poorly are considered high disability risks. Richfield said its workers' comp claims have fallen 68% since it has used the test, and it now requires managers to use it to eliminate unsuitable applicants."If the person scores low on the test, we don't make an exception for that person," said General Manager Fred Vezzetti. "
+
+Data-based hiring can expose companies to legal risk. Practices that even unintentionally filter out older or minority applicants can be illegal under federal equal opportunity laws. If a hiring practice is challenged in court as discriminatory, a company must show the criteria it is using are proven to predict success in the job. 
+
+Matthew Camardella, a partner at employment law firm Jackson Lewis LLP, specializes in determining whether companies are in compliance with equal opportunity laws. He said an increasing number of them are asking him to evaluate new software tools.
+
+Bigger data sets can raise the risks of violating the law by increasing the number of statistical relationships that could unwittingly screen out protected groups, he said. But they also could make it easier for companies to prove that the factors being measured are relevant to the job being filled.
+
+Evolv is cautious about exploiting some of the relationships it turns up for fear of violating equal opportunity laws. While it has found employees who live farther from call-center jobs are more likely to quit, it doesn't use that information in its scoring in the U.S. because it could be linked to race.
+
+But Kenexa, which tested 30 million applicants last year for thousands of clients, has found that a lengthy commute raises the risk of attrition in call-center and fast-food jobs. It asks applicants for call-center and fast-food jobs to describe their commute by picking options ranging from "less than 10 minutes" to "more than 45 minutes." The longer the commute, the lower their recommendation score for these jobs, says Jeff Weekley, who oversees the assessments. 
+
+Applicants also can be asked how long they have been at their current address and how many times they have moved. People who move more frequently "have a higher likelihood of leaving," Mr. Weekley said. 
+
+Bon-Ton Stores Inc. BONT -11.88%began using Kenexa in 2009 to screen applicants for hourly wage jobs in its stores and distribution centers. The retailer was looking in part to weed out candidates who might have a tendency to steal or miss work due to injury, said Denise Domian, its senior vice president for human resources. Kenexa's roughly 40-minute survey, she said, asks questions that the software scores for honesty. "People who are trying to fool the system are going to get tripped up," she said. 
+
+¡ªEmily Glazer contributed to this article.
+
+Write to Joseph Walker at joseph.walker@dowjones.com 
