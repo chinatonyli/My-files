@@ -1,0 +1,9 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =7
+let g:netrw_dirhist_1='/usr/share/texmf-dist/tex/latex/ctex'
+let g:netrw_dirhist_2='/usr/share/texmf-dist/tex/latex/ctex/fontset'
+let g:netrw_dirhist_3='/usr/share/texmf-dist/tex/latex/ctex'
+let g:netrw_dirhist_4='/usr/share/texmf-dist/tex/latex/ctex/opt'
+let g:netrw_dirhist_5='/usr/share/texmf-dist/tex/latex/ctex/fontset'
+let g:netrw_dirhist_6='/home/biergaizi/mnt/002/code/CyanogenMod-android_kernel_samsung_crespo-3870bd1/drivers/gpu/pvr/sgx'
+let g:netrw_dirhist_7='/home/biergaizi/android-util/gcc/gcc-linaro-4.6-2012.09/gcc/config/arm'
