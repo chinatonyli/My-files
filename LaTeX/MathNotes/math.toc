@@ -1,0 +1,6 @@
+\contentsline {chapter}{\numberline {第一章\hspace {0.3em}}全等三角形}{2}
+\contentsline {section}{\numberline {1.1}基本概念}{2}
+\contentsline {subsection}{\numberline {1.1.1}常见的三角形全等形式}{2}
+\contentsline {section}{\numberline {1.2}全等的判定}{4}
+\contentsline {subsection}{\numberline {1.2.1}一般三角形之判定}{4}
+\contentsline {subsection}{\numberline {1.2.2}直角三角形之判定}{4}

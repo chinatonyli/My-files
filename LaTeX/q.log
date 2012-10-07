@@ -1,0 +1,26 @@
+This is XeTeX, Version 3.1415926-2.4-0.9998 (TeX Live 2012) (format=xelatex 2012.9.28)  28 SEP 2012 20:00
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**math.tex
+(/usr/share/texmf-dist/tex/latex/tools/q.tex
+LaTeX2e <2011/06/27>
+Babel <v3.8m> and hyphenation patterns for english, dumylang, nohyphenation, pi
+nyin, loaded.
+File ignored
+)
+! Emergency stop.
+<*> math.tex
+            
+*** (job aborted, no legal \end found)
+
+ 
+Here is how much of TeX's memory you used:
+ 5 strings out of 495701
+ 130 string characters out of 3188594
+ 45159 words of memory out of 3000000
+ 3248 multiletter control sequences out of 15000+200000
+ 3640 words of font info for 14 fonts, out of 3000000 for 9000
+ 14 hyphenation exceptions out of 8191
+ 5i,0n,1p,88b,8s stack positions out of 5000i,500n,10000p,200000b,50000s
+No pages of output.

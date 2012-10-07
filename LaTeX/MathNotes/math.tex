@@ -1,0 +1,119 @@
+\documentclass[oneside]{ctexbook}
+\def\pgfsysdriver{pgfsys-dvipdfmx.def}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{MnSymbol}
+\usepackage{indentfirst}
+\usepackage{graphicx}
+\DeclareGraphicsRule{*}{eps}{*}{}
+\usepackage[hmargin={20mm,20mm},vmargin={20mm,10mm}]{geometry}
+\let\mathdollar\undefined
+\begin{document}
+
+\newtheorem{definition}{定义}[section]
+\newtheorem{theorem}{定理}[section]
+\newtheorem{lemma}[theorem]{引理}
+\newtheorem{corollary}[theorem]{推论}
+% \largetriangleup
+% \section{. . . }
+% \subsection{. . . }
+% \subsubsection{. . . }
+% \paragraph{. . . }
+% \subparagraph{. . . }
+
+\title{我的数学笔记}
+\author{李懿峰}
+\date{2012年9月}
+\maketitle
+\tableofcontents
+\chapter{全等三角形}
+
+\section{基本概念}
+\begin{definition}[全等形]
+    \label{qdx}
+    完全重合的两个图形叫全等形.  两个图形大小相同，形状相同.
+\end{definition}
+
+\begin{definition}[全等三角形]
+    满足定义\ref{qdx}的三角形. 符号“$\backcong$”，读作“全等于”. 书写全等式时要把对应定点字母放在对应的位置上.
+\end{definition}
+
+\begin{theorem}[全等三角形的性质]
+    等全三角形的对应边、对应角、对应中线、对应高、对应角平分线均相等.
+\end{theorem}
+
+例：如图\ref{p1}，$\triangle ABC\backcong\triangle DEF$
+\begin{figure}[htbp]
+        \centering
+        \begin{tikzpicture}
+            \draw
+            (5,0) node[below] {$A$}
+            --(9,0) node[below] {$C$}
+            --(7,3) node[above] {$B$}
+            --cycle;
+            \draw
+            (10,0) node[below] {$D$}
+            --(14,0) node[below] {$F$}
+            --(12,3) node[above] {$E$}
+            --cycle;
+        \end{tikzpicture}
+        \caption{这两个任意三角形全等}
+        \label{p1}
+    \end{figure}
+
+\begin{alignat*}{3}
+    &\because   \ &\triangle \mathrm{ABC} &\backcong \triangle \mathrm{DEF} &\mbox{（已知）}   \\
+    &\therefore \ &          \mathrm{AB}  &=\mathrm{DE}                                               \\
+    &           \ &          \mathrm{BC}  &=\mathrm{EF}                                               \\
+    &           \ &          \mathrm{AC}  &=\mathrm{DF} &\mbox{（全等三角形的对应边相等）} \\
+    &\therefore \ &\angle \mathrm{ABC}    &= \angle \mathrm{DEF} \\
+    &           \ &\angle \mathrm{ACB}    &= \angle \mathrm{DFE} \\
+    &           \ &\angle \mathrm{BAC}    &= \angle \mathrm{EDF}
+\end{alignat*}
+
+\subsection{常见的三角形全等形式}
+
+全等三角形通常会以七种形式出现，如图\ref{p2}所示.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics{images/1_figs-01.mps}
+\includegraphics{images/1_figs-02.mps}
+\includegraphics{images/1_figs-04.mps}
+\includegraphics{images/1_figs-05.mps}
+\includegraphics{images/1_figs-06.mps}
+\includegraphics{images/1_figs-07.mps}
+\includegraphics{images/1_figs-03.mps}
+\caption{七组常见的三角形全等形式}
+\label{p2}
+\end{figure}
+
+\newpage
+
+\section{全等的判定}
+
+\subsection{一般三角形之判定}
+\begin{theorem}[SSS]
+    三边对应相等的两三角形全等.
+\end{theorem}
+
+\begin{theorem}[SAS]
+    两边对应相等且夹角相等的里两三角形全等.
+\end{theorem}
+
+\begin{theorem}[ASA]
+    两角对应相等且夹边相等的两三角形全等.
+\end{theorem}
+
+\begin{theorem}[AAS]
+    两个角和其中一个角的对边对应相等的两个三角形全等.
+\end{theorem}
+
+\subsection{直角三角形之判定}
+\begin{theorem}[HL]
+    斜边和一直角边对应相等的两个三角形全等.
+\end{theorem}
+
+
+\end{document}
