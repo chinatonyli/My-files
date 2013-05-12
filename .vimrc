@@ -1,5 +1,50 @@
 set nocompatible "不要受限于vi
- 
+
+"--- Begin Vundle ---
+
+filetype off
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+"Vundle 自己管理自己
+Bundle 'vundle'
+
+"代码自动补全
+"Bundle 'neocomplcache' 
+"    let g:neocomplcache_enable_at_startup = 1
+
+"Vim 代码补完计划 - YouCompleteMe
+Bundle 'Valloric/YouCompleteMe'
+
+"代码错误检查
+Bundle 'Syntastic'
+    "let g:syntastic_python_flake8_args='--ignore=E501'
+    let g:syntastic_check_on_open=1 "打开文件时检查错误
+
+"自动编码检测
+Bundle 'FencView.vim'
+
+"快速移动光标
+Bundle 'EasyMotion'
+    let g:EasyMotion_leader_key = '<Leader>'
+
+"高级状态栏
+Bundle 'Lokaltog/vim-powerline'
+    set laststatus=2
+"   let g:Powerline_symbols = 'fancy' "启用酷炫效果
+
+"快速注释代码
+Bundle 'The-NERD-Commenter'
+
+"QML 语法高亮
+Bundle 'vim-qml'
+
+"Fcitx 输入法自动切换
+Bundle 'fcitx.vim'
+
+"--- End Vundle ---
+
+
 set cindent "使用C语言缩进
 "程序中所有的制表符和缩进，都会以四个空格替代
 set expandtab
@@ -14,11 +59,14 @@ set iskeyword+=_,$,@,%,#,- "带有如下符号的单词不要被换行分割
 set backspace=2 "使回格键（backspace）正常处理indent, eol, start等
 set autoread "pyth设置当文件被改动时自动载入
 set wrap "自动折行
-set textwidth=80 "自动换行
+"set textwidth=80 "自动换行
 set fo+=m "一个汉字作为两个字符计算换行
+set modeline "通过代码中的注释设置Vim选项
+set ruler "显示行号列号
+set showcmd "显示输入的命令
 
 filetype plugin indent on "根据文件类型智能载入插件、缩进
-let g:acp_completeoptPreview = 1 "在ACP自动补全时显示文档
+syntax on
 
 "让Vim的补全菜单行为与一般IDE一致(参考VimTip1228)
 set completeopt+=longest "离开插入模式后自动关闭预览窗口
@@ -34,6 +82,16 @@ inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>"
 "针对Python的制表符替换，不再使用
 "autocmd FileType python setlocal et sta sw=4 sts=4
 "如有需要，可设置忽略部分PEP8错误 let g:flake8_ignore="E501"
+autocmd FileType Makefile noexpandtab notabstop
+
+"移除 Python 中违反 PEP8 的空格
+autocmd BufWritePre *.py :%s/\s\+$//e
+
+"移除 C/C++ 代码中多余的空格
+autocmd BufWritePre *.cpp :%s/\s\+$//e
+autocmd BufWritePre *.c :%s/\s\+$//e
+autocmd BufWritePre *.h :%s/\s\+$//e
+autocmd BufWritePre *.hpp :%s/\s\+$//e
 
 "所有信息、编码一律为简体中文，UTF-8，并避免乱码
 set encoding=utf-8
@@ -77,7 +135,7 @@ func! CompileAndRun()
     elseif &filetype == 'sh'
         :!./%
     elseif &filetype == 'python'
-        exec "!python2 %"
+        exec "!python3 %"
     elseif &filetype == 'html'
         exec "!chromium % &"
     endif
