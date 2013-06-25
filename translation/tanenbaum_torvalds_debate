@@ -1,0 +1,23 @@
+The Tanenbaum–Torvalds debate was a debate between Andrew S. Tanenbaum and Linus Torvalds, regarding Linux and kernel architecture in general. Tanenbaum began the debate in 1992 on the Usenet discussion group comp.os.minix,[1] arguing that microkernels are superior to monolithic kernels and therefore Linux was, even in 1992, obsolete. Other notable hackers such as David S. Miller and Theodore Ts'o joined the debate.[2]
+
+The debate has sometimes been considered a flame war.
+
+塔能鲍姆-托瓦兹辩论，是安德鲁·斯图尔特·塔能鲍姆和林纳斯·托瓦兹的关于 Linux 和普遍的内核架构设计进行的辩论。这场辩论发生在 1992 年的 Usenet 讨论组群 comp.os.minix 上。塔能鲍姆认为，微内核设计要比宏内核更加优越，所以即使在 1992 年，宏内核的 Linux 也是过时的。其它著名的黑客，如 David S. Miller 和 Theodore Ts'o 都加入了辩论。
+
+这场辩论有时也被视为一场口水战。
+
+This subject was revisited in 2006 after Tanenbaum wrote a cover story for Computer magazine titled "Can We Make Operating Systems Reliable and Secure?".[3] While Tanenbaum himself has mentioned that he did not write the article to renew the debate on kernel design,[4] the juxtaposition of the article and an archived copy of the 1992 debate on the technology site Slashdot caused the subject to be rekindled.[5] Torvalds posted a rebuttal of Tanenbaum's arguments via an online discussion forum,[6] and several technology news sites began reporting the issue.[7] This prompted Jonathan Shapiro to respond that most of the field-proven reliable and secure computer systems use a more microkernel-like approach.[8]
+
+这个话题在 2006 年塔能鲍姆在 《Computer》杂志发表题为《我们能让操作系统可靠和安全吗？》的文章后被再次提起。
+
+尽管塔能鲍姆本人提到，他并不是想借这篇文章重启内核设计的论战，但是这篇文章本身和 Slashdot 技术网站上附加的 1992 年论战的归档共同使战火重燃。
+
+托瓦兹通过一个在线论坛反驳了塔能鲍姆的论点，几个技术新闻网站随即开始对其进行报道。这使 Jonathan Shapiro 回应称，大多数经过实际检验的安全可靠的计算机系统，都使用更近似于微内核的模式设计。
+
+While the debate initially started out as relatively moderate, with both parties involved making only banal statements about kernel design, it would get progressively more detailed and sophisticated with every round of posts. Besides just kernel design, the debate branched into several other topics, such as which microprocessor architecture would win out over others in the future. Besides Tanenbaum and Torvalds, several other people joined the debate, including Peter MacDonald, an early Linux kernel developer and creator of one of the first distributions, Softlanding Linux System; David S. Miller, one of the core developers of the Linux kernel; and Theodore Ts'o, the first North American Linux kernel developer.
+
+虽然初步的辩论显得相对温和，当事人双方仅仅平淡了讨论了有关内核设计的话题。但随着每一轮的发帖，辩论开始逐步变得详细和复杂，甚至跨足于内核设计之外的其它领域，如"微处理器架构将在未来战胜其它架构"。除了塔能鲍姆和托瓦兹，一些其它的人也加入了辩论，包括 Peter MacDonald - 早期的 Linux 内核开发者和第一个发行版 Softlanding Linux System 的创建者；David S. Miller - Linux 内核的核心开发者之一，和 Theodore Ts'o - 北美洲第一个 Linux 内核开发者。
+
+The first occurrence of this debate was recorded on January 29, 1992, when Tanenbaum first posted his criticism on the Linux kernel to comp.os.minix, noting how the monolithic design was detrimental to its abilities, in a post titled LINUX is obsolete.[1] While he initially did not go into great technical detail to explain why he felt that the microkernel design was better, he did suggest that it was mostly related to portability, arguing that the Linux kernel was too closely tied to the x86 line of processors to be of any use in the future, as this architecture would be superseded by then. To put things into perspective, he mentioned how writing a monolithic kernel in 1991 is "a giant step back into the 1970s".
+
+第一条有关这场辩论的记录，在 1992 年 1 月 29 日。塔能鲍姆在 comp.os.minux 上发表了他的批评。他在题为《Linux 是过时的》的帖子中，指出宏内核在整体设计上是有害的。虽然他最初并没有加入高深的技术细节，来解释他认为微内核更好的原因，但他也表明，这关乎可移植性，Linux 的耦合度太高，以至于不能在未来的 x86 处理器上使用，这种内核架构届时将被取代。他提到，要正确看待这件事情，在 1991 年编写宏内核，是“倒退到 1970 年的巨大退步“。
