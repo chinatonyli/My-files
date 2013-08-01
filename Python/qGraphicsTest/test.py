@@ -42,6 +42,7 @@ class MainWindow(QtGui.QGraphicsView):
         super(MainWindow, self).__init__(parent)
 
         mainLayout = QtGui.QGraphicsLinearLayout()
+        mainLayout.setContentsMargins(0, 0, 0, 0)
         mainLayout.setSpacing(0)
 
         avatar = self._avatar()
@@ -53,6 +54,7 @@ class MainWindow(QtGui.QGraphicsView):
         mainLayout.setAlignment(text, Qt.AlignCenter)
 
         mainWidget = QtGui.QGraphicsWidget()
+        mainWidget.setContentsMargins(0, 0, 0, 0)
         mainWidget.setLayout(mainLayout)
         
         scene = QtGui.QGraphicsScene()
@@ -65,6 +67,7 @@ class MainWindow(QtGui.QGraphicsView):
         text = TextLayoutItem("Hello, world!")
 
         avatarLayout = QtGui.QGraphicsLinearLayout()
+        avatarLayout.setContentsMargins(0, 0, 0, 0)
         avatarLayout.setOrientation(Qt.Vertical)
         avatarLayout.setSpacing(0)
 
@@ -83,7 +86,9 @@ class MainWindow(QtGui.QGraphicsView):
 
     @staticmethod
     def _text():
-        text = TextLayoutItem("UNIX - Where is a shell, where is a way.")
+        text = TextLayoutItem("UNIX"# - Where there is a shell, "
+                              #"there is a way."
+                             )
         return text
 
 

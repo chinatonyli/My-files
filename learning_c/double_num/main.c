@@ -5,7 +5,7 @@ void doublenum(char *number);
 
 int main(void) {
     char number[] = {"0999"};
-    
+
     doublenum(number);
     printf("%s\n", number);
     return 0;
