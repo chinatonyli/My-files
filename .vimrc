@@ -9,16 +9,18 @@ call vundle#rc()
 "Vundle 自己管理自己
 Bundle 'vundle'
 
+"Vim 代码补完计划 - YouCompleteMe
+Bundle 'Valloric/YouCompleteMe'
+    let g:ycm_confirm_extra_conf = 0
+
 "代码自动补全
 "Bundle 'neocomplcache' 
 "    let g:neocomplcache_enable_at_startup = 1
 
-"Vim 代码补完计划 - YouCompleteMe
-Bundle 'Valloric/YouCompleteMe'
-
 "代码错误检查
-Bundle 'Syntastic'
-    "let g:syntastic_python_flake8_args='--ignore=E501'
+Bundle 'scrooloose/syntastic'
+    let g:syntastic_python_checkers = ['flake8']
+    let g:syntastic_python_flake8_args='--ignore=E501'
     let g:syntastic_check_on_open=1 "打开文件时检查错误
 
 "自动编码检测
@@ -37,10 +39,17 @@ Bundle 'Lokaltog/vim-powerline'
 Bundle 'The-NERD-Commenter'
 
 "QML 语法高亮
-Bundle 'vim-qml'
+Bundle 'peterhoeg/vim-qml'
+
+"HTML/PHP 缩进增强
+Bundle 'indenthtml.vim'
+Bundle 'php.vim'
 
 "Fcitx 输入法自动切换
 Bundle 'fcitx.vim'
+
+"终端模拟器
+Bundle 'oplatek/Conque-Shell'
 
 "--- End Vundle ---
 
@@ -137,7 +146,7 @@ func! CompileAndRun()
     elseif &filetype == 'python'
         exec "!python3 %"
     elseif &filetype == 'html'
-        exec "!chromium % &"
+        exec "!chromium \"% &\""
     endif
 endfunc`
 
