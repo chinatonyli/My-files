@@ -1,0 +1,67 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <SPI.h>
+
+extern "C" {
+#include <base64.h>
+#include "ssd1306.cpp"
+}
+
+#define NBYTES ((128 * 64) / 8)
+#define FRAMES(length) ((length) / (NBYTES))
+
+#define DC 9
+#define RST 8
+
+#define MAX 1024
+
+
+unsigned char g_image_buffer[MAX] = {0};
+
+
+int load_movie(void)
+{
+    unsigned int length;
+    for (length = 1; length <= MAX; length++) {
+        int chr = Serial.read();
+        if (chr == -1) {
+            length--;
+            continue;
+        }
+        else {
+            g_image_buffer[length - 1] = chr;
+        }
+    }
+    length -= 1;
+
+    return FRAMES(length);
+}
+
+
+void play_movie(unsigned char frames)
+{
+    ssd1306_image(g_image_buffer);
+}
+
+
+void setup(void)
+{
+    SPI.begin();
+    SPI.setBitOrder(MSBFIRST);
+    SPI.setDataMode(SPI_MODE3);
+    SPI.setClockDivider(SPI_CLOCK_DIV64);
+
+    ssd1306_init(DC, RST);
+    //ssd1306_fill(0xFF);
+    Serial.begin(115200);
+    Serial.println("RD");
+}
+
+
+void loop(void)
+{
+    int frames = load_movie();
+    Serial.println("Loaded")
+    play_movie(frames);
+    delay(100000000);
+}
