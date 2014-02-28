@@ -1,0 +1,12 @@
+#!/bin/bash
+
+full=$1
+base=$(echo $full | python -c "import os; print(os.path.splitext(input())[0])")
+
+echo "${full} Pass 1..."
+ffmpeg -i ${full} -vcodec mpeg4 -vtag XVID -vf scale=480:270,pad=480:360:0:45 -b:v 550k -bf 2 -g 300 -pass 1 -passlogfile ${base}.log -an -threads 0 -f rawvideo -y /dev/null
+
+echo "${full} Pass 2..."
+ffmpeg -i ${full} -vcodec mpeg4 -vtag XVID -vf scale=480:270,pad=480:360:0:45 -b:v 550k -bf 2 -g 300 -pass 2 -passlogfile ${base}.log -acodec libmp3lame -ab 192k -ar 48000 -ac 2 -threads 0 -f avi ${base}.avi
+
+rm ${base}*.log

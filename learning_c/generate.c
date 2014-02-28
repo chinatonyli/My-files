@@ -6,7 +6,7 @@ int generate(int sum) {
     int a;
     int b;
     int c;
- 
+
     for (a = 1, b = 1; (sum - a - b) > 0; a++) {
         for (c = 2; c > 1; b++) {
             c = sum - a - b;
