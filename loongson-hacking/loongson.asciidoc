@@ -1,0 +1,219 @@
+Hacking on Loongson YeeLoong 8089D
+===================================
+:author:    Tom Li
+:email:     biergaizi@member.fsf.org
+:revision:  0.01
+:copyright: Copyright (C) 2014 Tom Li, all right reserved.
+:backend:   slidy
+:max-width: 45em
+:data-uri:
+:icons:
+
+
+The Core
+----------
+
+Loongson 2F
+
+[role="incremental"]
+- Single Core
+
+- 64-bit MIPS architecture, MIPS III instruction
+  * Not MIPS IV, MIPS V, or MIPS 32 +r2+, but MIPS III.
+  * Three ABIs: +O32+, +N32+, +N64+, dead +NUBI+.
+  * The confusing part when build the system
+
+- Software-controlled dynamic power management
+  * 199 MHz - [line-through]#1 GHz# 796 MHz
+  * 4 Walt (Max)
+
+- Integrated DDR2 memory controller
+- Extra MMX-like SIMD instruction
+  * Writing optimized assmebly code for mutilmedia, graphics, etc.
+
+- Caches
+  * L1: 64 KB Instruction / 64 KB Data
+  * L2: 512 KB 4-way 
+
+- Bug
+
+
+The Laptop
+------------
+
+YeeLoong 8089D
+
+[role="incremental"]
+- Loongson 2F
+
+- 1 GB DDR2 Memory.
+
+- 8 GB SanDisk SSD (SDPA1AA-8G)
+  * CE/ZIF port, connected by a CE/ZIF -> IDE converter
+  * Very slow, but almost the maximum speed of the south bridge.
+
+- AMD CS5536 South bridge.
+
+- SiliconMotion SM712 Graphics Card.
+  * No 3D acceleration,  simple 2D acceleration.
+
+- RTL8139 Ethernet / RTL8187B WiFi
+  * The +rtl8187+ kernel module caused the kernel panic (fixed).
+
+- 20 Walt max.
+
+
+Challege 1 - Bootloader
+------------------------
+
+PMON / PMON 2000
+
+[role="incremental"]
+- A very common firmware for MIPS evaluation boards and development systems.
+  * Linksys WRT54G (hackers' love it)
+  * Asus WL-300g
+ 
+- A fork of PMON: PMON 2000
+  * PMON on 8089D is Loongson's fork of PMON 2000
+
+- Bootloader
+  * No GRUB/LILO/SysLinux needed, but GRUB is loadable.
+
+- Bugs
+[role="incremental"]
+  * No ext4/UFS support, even ext2 support is limited by specific block size.
+  * Very slow when loading +initrd+.
+  * Possible Lockup when other non-bootable device plugged in
+    
+NOTE: Use a 100 MiB ext2 partition.
+
+NOTE: Don't use +initrd+.
+
+NOTE: Unplugin all USB device before boot.
+
+
+boot.cfg
+---------
+
+--------------
+default 0
+timeout 3
+showmenu 1
+title GNU/Linux
+        kernel (wd0,0)/boot/vmlinux-yeeloong
+        initrd (wd0,0)/boot/initrd.img-yeeloong
+        args root=/dev/sda1
+        g  # needed in interactive console only, just like GRUB
+--------------
+
+
+Linux
+------
+
+- Debian
+- gNewsence
+- Parabola
+- Gentoo
+  * Install from stage3, don't use any of stage4.
+  * stage3-mipsel3_multilib-xxxxx
+- FreeBSD
+- NetBSD
+
+Can't be difficult to install them.
+
+
+Hack #1: GCC Bug
+-----------------
+
+WARNING: A Bug in GCC breaks many programs.
+
+
+.#58158
+--------------
+error: unrecognizable insn:                                                                                           
+ DEFINE_SQUARE (int16, 32767.0);                                                                                                               
+ ^                                                                                                                                             
+(insn 106 105 107 8 (set (reg:SI 284)                                                                                                          
+        (if_then_else:SI (ne:CC (reg:CC 67 $fcc0)                                                                                              
+                (const_int 0 [0]))                                                                                                             
+            (reg:SI 249 [ iftmp.184 ])                                                                                                         
+            (reg:SI 251 [ iftmp.184 ]))) -1                                                                                                    
+     (nil))                                                                                                                                    
+internal compiler error: in extract_insn
+----------------
+
+What's wrong?
+~~~~~~~~~~~~~
+
+[quote, Andrew Pinski, Bugzilla]
+____
+This is a loongson2f specific bug in the back-end.  It works correctly for -march=octeon/-march=mips32/-march=mips64 .
+
+The backend says we have conditional moves on the floating point CC modes and expands it that way but really the target says we don't and it causes the ICE.
+
+Since it is only loongson2f only bug I am not going to fix it.  I will let the loongson maintainer fix it since I don't know what loongson2f really has when it comes to conditional moves.
+
+Confirmed.
+____
+
+Apply the patch and rebuild gcc.
+
+
+Hack #2: CPU Bug
+----------------
+
++binutils+ has two workarounds.
+
+* `-mfix-loongson2f-jump`
+* `-mfix-loongson2f-nop`
+
+Both of them are needed for the kernel. But for Linux, just enable +CONFIG_CPU_LOONGSON2F_WORKAROUNDS+. Enable No.2 for userspace program.
+
+* `-Wa,-mfix-loongson2f-nop`
+
+
+Hack #3: +rtl8187+ module cause kernel panic
+---------------------------------------------
+
+Bisect stuff.
+
+Hack #4: +loongson-sources+
+----------------------------
+
+A kernel with many patches for yeeloong 8089D users.
+
+Todo 1: More RAM?
+
+// TODO: Picture.
+
+[quote, https://encrypted.pcode.nl/blog/2011/03/31/upgrading-the-lemote-yeeloongs-ram/]
+_____
+Yeeloong should always be single rank, most typical 2GB modules aren’t.
+_____
+
+
+Todo 1: Fix servarl PMON bugs
+-------------------------------
+
+emm...
+
+
+Todo 2: Implement the (correct) 2D acceleration for SM712
+----------------------------------------------------------
+
+NetBSD has a implementation. may help.
+
+Todo 3: Debug siliconmotion
+-----------------------------
+
+Using SSH? No.
+
+Todo 4: Random instruction error since 3.13
+--------------------------------------------
+
+Remove `march=loongson2f` fix it. Really a problem?
+
+Todo 5: Resync the decoder written in assmebly for LibAV/FFmpeg
+---------------------------------------------------------------
+
+I don't know LibAV build system well. I can not link them...
