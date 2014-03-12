@@ -19,9 +19,9 @@ Loongson 2F
 - Single Core
 
 - 64-bit MIPS architecture, MIPS III instruction
-  * Not MIPS IV, MIPS V, or MIPS 32 +r2+, but MIPS III.
-  * Three ABIs: +O32+, +N32+, +N64+, dead +NUBI+.
-  * The confusing part when build the system
+  * The confusing parts when build the system:
+    ** Not MIPS IV, MIPS V, or MIPS 32 +r2+, but MIPS III.
+    ** Three ABIs: +O32+, +N32+, +N64+, dead +NUBI+.
 
 - Software-controlled dynamic power management
   * 199 MHz - [line-through]#1 GHz# 796 MHz
@@ -58,7 +58,7 @@ YeeLoong 8089D
   * No 3D acceleration,  simple 2D acceleration.
 
 - RTL8139 Ethernet / RTL8187B WiFi
-  * The +rtl8187+ kernel module caused the kernel panic (fixed).
+  * Bug
 
 - 20 Walt max.
 
@@ -85,11 +85,6 @@ PMON / PMON 2000
   * Very slow when loading +initrd+.
   * Possible Lockup when other non-bootable device plugged in
     
-NOTE: Use a 100 MiB ext2 partition.
-
-NOTE: Don't use +initrd+.
-
-NOTE: Unplugin all USB device before boot.
 
 
 boot.cfg
@@ -106,6 +101,11 @@ title GNU/Linux
         g  # needed in interactive console only, just like GRUB
 --------------
 
+NOTE: Use a 100 MiB ext2 partition.
+
+NOTE: Don't use +initrd+.
+
+NOTE: Unplugin all USB device before boot.
 
 Linux
 ------
@@ -122,8 +122,8 @@ Linux
 Can't be difficult to install them.
 
 
-Hack #1: GCC Bug
------------------
+#1: Fixup GCC
+-------------
 
 WARNING: A Bug in GCC breaks many programs.
 
@@ -159,61 +159,70 @@ ____
 Apply the patch and rebuild gcc.
 
 
-Hack #2: CPU Bug
-----------------
+#2: Workaround the CPU Bug
+--------------------------
 
 +binutils+ has two workarounds.
 
 * `-mfix-loongson2f-jump`
 * `-mfix-loongson2f-nop`
 
-Both of them are needed for the kernel. But for Linux, just enable +CONFIG_CPU_LOONGSON2F_WORKAROUNDS+. Enable No.2 for userspace program.
+Both of them are needed for the kernel. But for Linux, just enable +CONFIG_CPU_LOONGSON2F_WORKAROUNDS+. Enable [2] for userspace program.
 
-* `-Wa,-mfix-loongson2f-nop`
+NOTE: Always pass `-Wa,-mfix-loongson2f-nop` to +gcc+. You had better add it to you +CFLAGS+.
 
 
-Hack #3: +rtl8187+ module cause kernel panic
----------------------------------------------
+#3: Fixup +rtl8187+
+-------------------
 
-Bisect stuff.
+.Kernel Panic after Connecting an Access Point
+image:images/rtl8187-kernel-panic.jpg["Kernel Panic", width=768]
 
-Hack #4: +loongson-sources+
-----------------------------
+#4: Created +loongson-sources+
+-------------------------------
 
 A kernel with many patches for yeeloong 8089D users.
 
-Todo 1: More RAM?
+More RAM
+--------
 
-// TODO: Picture.
+.a single DDR2 SODIMM slot populated with a 1GB 667mhz A-Data module.
+image:images/adata-ram.jpg["Adata RAM", width=768]
 
-[quote, https://encrypted.pcode.nl/blog/2011/03/31/upgrading-the-lemote-yeeloongs-ram/]
+[quote, Pascal de Bruijn, https://encrypted.pcode.nl/blog]
 _____
-Yeeloong should always be single rank, most typical 2GB modules aren’t.
+I tried replacing it with random Hynix 2GB 667mhz module and the Yeeloong wouldn’t boot at all. I’ve contacted the vendor to ask if it’s possible to upgrade the Yeeloong at all, and if so, if any requirements need to be met.
+
+In the meantime I received a mail from Gilbert Fernandes who informed me that the memory in the Yeeloong should always be single rank (most typical 2GB modules aren’t).
 _____
 
 
-Todo 1: Fix servarl PMON bugs
--------------------------------
+Fixup PMON
+-----------
 
-emm...
+* Boot Lockups
+* Low Speed +initrd+ Loading
+* Support ext4
 
+But it can't be done without a EEPROM programmer. I'll buy one next week.
 
-Todo 2: Implement the (correct) 2D acceleration for SM712
-----------------------------------------------------------
+Implementing the (correct) 2D acceleration
+------------------------------------------
 
 NetBSD has a implementation. may help.
 
-Todo 3: Debug siliconmotion
------------------------------
+Debugging +xf86-video-siliconmotion+
+-------------------------------------
 
 Using SSH? No.
 
-Todo 4: Random instruction error since 3.13
---------------------------------------------
+Resyncing the decoder written in assmebly for LibAV/FFmpeg
+-----------------------------------------------------------
+
+I don't know LibAV build system well. I can not link them...
+
+Others
+-------
 
 Remove `march=loongson2f` fix it. Really a problem?
 
-Todo 5: Resync the decoder written in assmebly for LibAV/FFmpeg
----------------------------------------------------------------
-
-I don't know LibAV build system well. I can not link them...
