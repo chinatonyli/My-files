@@ -101,14 +101,18 @@ title GNU/Linux
         g  # needed in interactive console only, just like GRUB
 --------------
 
-NOTE: Use a 100 MiB ext2 partition.
-
-NOTE: Don't use +initrd+.
-
-NOTE: Unplugin all USB device before boot.
+[NOTE]
+.Avoid Problems
+================================
+* Use a 100 MiB ext2 partition.
+* Don't use +initrd+.
+* Unplugin all USB device before boot.
+================================
 
 Linux
 ------
+
+Installing them is not difficult :)
 
 - Debian
 - gNewsence
@@ -119,14 +123,11 @@ Linux
 - FreeBSD
 - NetBSD
 
-Can't be difficult to install them.
+NOTE: Using +stage3-mipsel3+ to install Gentoo.
 
 
 #1: Fixup GCC
 -------------
-
-WARNING: A Bug in GCC breaks many programs.
-
 
 .#58158
 --------------
@@ -141,6 +142,8 @@ error: unrecognizable insn:
      (nil))                                                                                                                                    
 internal compiler error: in extract_insn
 ----------------
+
+WARNING: Don't use GCC 4.8 without the patch.
 
 What's wrong?
 ~~~~~~~~~~~~~
