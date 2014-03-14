@@ -2,30 +2,40 @@ Hacking on Loongson YeeLoong 8089D
 ===================================
 :author:    Tom Li
 :email:     biergaizi@member.fsf.org
+:revdate:   March 14, 2014
 :revision:  0.01
-:copyright: Copyright (C) 2014 Tom Li, all right reserved.
+:copyright: Tom Li, all right reserved.
 :backend:   slidy
 :max-width: 45em
 :data-uri:
 :icons:
 
 
-The Core
-----------
+Happy Hacking!
+----------------
 
-Loongson 2F
+[caption=""]
+image::images/rms.jpg[float="center", width=768]
+
+
+The Core
+---------
+
+.Loongson 2F
+[caption=""]
+image::images/loongson-2f.jpg["Loongson 2F CPU", width=256, float="right"]
 
 [role="incremental"]
 - Single Core
 
 - 64-bit MIPS architecture, MIPS III instruction
-  * The confusing parts when build the system:
+  * The confused parts when build the system:
     ** Not MIPS IV, MIPS V, or MIPS 32 +r2+, but MIPS III.
     ** Three ABIs: +O32+, +N32+, +N64+, dead +NUBI+.
 
 - Software-controlled dynamic power management
   * 199 MHz - [line-through]#1 GHz# 796 MHz
-  * 4 Walt (Max)
+  * 4 W (Max)
 
 - Integrated DDR2 memory controller
 - Extra MMX-like SIMD instruction
@@ -41,10 +51,14 @@ Loongson 2F
 The Laptop
 ------------
 
-YeeLoong 8089D
+.YeeLoong 8089D
+[caption=""]
+image::images/8089d.jpg["YeeLoong 8089D", width=300, float="right"]
 
 [role="incremental"]
 - Loongson 2F
+
+- No Proprietary Firmwares
 
 - 1 GB DDR2 Memory.
 
@@ -53,22 +67,24 @@ YeeLoong 8089D
   * Very slow, but almost the maximum speed of the south bridge.
 
 - AMD CS5536 South bridge.
+  * Internal 80-wire IDE.
 
 - SiliconMotion SM712 Graphics Card.
-  * No 3D acceleration,  simple 2D acceleration.
+  * No 3D acceleration, simple 2D acceleration.
 
 - RTL8139 Ethernet / RTL8187B WiFi
   * Bug
 
-- 20 Walt max.
+- 20 W max.
 
 
-Challege 1 - Bootloader
-------------------------
+BIOS/Bootloader
+----------------
 
 PMON / PMON 2000
 
 [role="incremental"]
+
 - A very common firmware for MIPS evaluation boards and development systems.
   * Linksys WRT54G (hackers' love it)
   * Asus WL-300g
@@ -85,6 +101,8 @@ PMON / PMON 2000
   * Very slow when loading +initrd+.
   * Possible Lockup when other non-bootable device plugged in
     
+- Free Software
+  * BSD License
 
 
 boot.cfg
@@ -95,11 +113,13 @@ default 0
 timeout 3
 showmenu 1
 title GNU/Linux
-        kernel (wd0,0)/boot/vmlinux-yeeloong
-        initrd (wd0,0)/boot/initrd.img-yeeloong
-        args root=/dev/sda1
-        g  # needed in interactive console only, just like GRUB
+    kernel (wd0,0)/boot/vmlinux-yeeloong
+    initrd (wd0,0)/boot/initrd.img-yeeloong
+    args root=/dev/sda1
+    g <1>
 --------------
+
+<1> It is needed in interactive console only, just like +boot+ in GRUB.
 
 [NOTE]
 .Avoid Problems
@@ -119,11 +139,10 @@ Installing them is not difficult :)
 - Parabola
 - Gentoo
   * Install from stage3, don't use any of stage4.
-  * stage3-mipsel3_multilib-xxxxx
 - FreeBSD
 - NetBSD
 
-NOTE: Using +stage3-mipsel3+ to install Gentoo.
+NOTE: +stage3-mipsel3+ is the correct Gentoo stage3 for Loongson 2F.
 
 
 #1: Fixup GCC
@@ -179,7 +198,24 @@ NOTE: Always pass `-Wa,-mfix-loongson2f-nop` to +gcc+. You had better add it to 
 -------------------
 
 .Kernel Panic after Connecting an Access Point
-image:images/rtl8187-kernel-panic.jpg["Kernel Panic", width=768]
+image:images/rtl8187-kernel-panic.jpg["Kernel Panic", width=512]
+
++rtl8187+ is broken on MIPS since Linux 3.8.
+
+[quote, Stanislaw Gruszka, https://bugzilla.kernel.org/show_bug.cgi?id=54391]
+________
+There are only 3 changes on rtl8187 between 3.7 and 3.8 version.
+
+-----------
+[stasiu@localhost linux]$ git log --pretty=oneline v3.7..v3.8 
+-- drivers/net/wireless/rtl818x/
+fd549f1 rtl8187: remove __dev* attributes
+fb4e899 rtl8187: remove __dev* attributes
+f4bda33 support RX_FLAG_MACTIME_END
+-----------
+
+None of them can be responsible for this bug. This seems to be problem in other subsystem like USB or network. The only way to move this bug forward is probably bisection.
+________
 
 #4: Created +loongson-sources+
 -------------------------------
