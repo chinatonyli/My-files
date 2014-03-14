@@ -17,6 +17,24 @@ Happy Hacking!
 [caption=""]
 image::images/rms.jpg[float="center", width=768]
 
+About Me
+---------
++https://about.me/biergaizi+
+
+image::images/github.png[float="right", width=450]
+
+Tom Li (李懿峰), biergaizi (比尔盖子)
+
+- Great 9 Student.
+- FOSS user / developer
+- image:images/fsf-12370.png[]
+- Member of Free Software Foundation and BLUG.
+- Gentoo Packager, maintains +gentoo-zh+.
+- Weibo/Twitter: @比尔盖子V / @biergaizi
+- Blog: https://biergaizi.info
+- GPG: 717E3FB8
+
+NOTE: I am not a fan of Bill Gates, it is a joke (高端黑？)
 
 The Core
 ---------
@@ -43,7 +61,7 @@ image::images/loongson-2f.jpg["Loongson 2F CPU", width=256, float="right"]
 
 - Caches
   * L1: 64 KB Instruction / 64 KB Data
-  * L2: 512 KB 4-way 
+  * L2: 512 KB 4-way
 
 - Bug
 
@@ -88,7 +106,7 @@ PMON / PMON 2000
 - A very common firmware for MIPS evaluation boards and development systems.
   * Linksys WRT54G (hackers' love it)
   * Asus WL-300g
- 
+
 - A fork of PMON: PMON 2000
   * PMON on 8089D is Loongson's fork of PMON 2000
 
@@ -100,7 +118,7 @@ PMON / PMON 2000
   * No ext4/UFS support, even ext2 support is limited by specific block size.
   * Very slow when loading +initrd+.
   * Possible Lockup when other non-bootable device plugged in
-    
+
 - Free Software
   * BSD License
 
@@ -150,22 +168,22 @@ NOTE: +stage3-mipsel3+ is the correct Gentoo stage3 for Loongson 2F.
 
 .#58158
 --------------
-error: unrecognizable insn:                                                                                           
- DEFINE_SQUARE (int16, 32767.0);                                                                                                               
- ^                                                                                                                                             
-(insn 106 105 107 8 (set (reg:SI 284)                                                                                                          
-        (if_then_else:SI (ne:CC (reg:CC 67 $fcc0)                                                                                              
-                (const_int 0 [0]))                                                                                                             
-            (reg:SI 249 [ iftmp.184 ])                                                                                                         
-            (reg:SI 251 [ iftmp.184 ]))) -1                                                                                                    
-     (nil))                                                                                                                                    
+error: unrecognizable insn:
+ DEFINE_SQUARE (int16, 32767.0);
+ ^
+(insn 106 105 107 8 (set (reg:SI 284)
+        (if_then_else:SI (ne:CC (reg:CC 67 $fcc0)
+                (const_int 0 [0]))
+            (reg:SI 249 [ iftmp.184 ])
+            (reg:SI 251 [ iftmp.184 ]))) -1
+     (nil))
 internal compiler error: in extract_insn
 ----------------
 
 WARNING: Don't use GCC 4.8 without the patch.
 
 What's wrong?
-~~~~~~~~~~~~~
+--------------
 
 [quote, Andrew Pinski, Bugzilla]
 ____
@@ -202,12 +220,15 @@ image:images/rtl8187-kernel-panic.jpg["Kernel Panic", width=512]
 
 +rtl8187+ is broken on MIPS since Linux 3.8.
 
++git bisect+
+-------------
+
 [quote, Stanislaw Gruszka, https://bugzilla.kernel.org/show_bug.cgi?id=54391]
 ________
 There are only 3 changes on rtl8187 between 3.7 and 3.8 version.
 
 -----------
-[stasiu@localhost linux]$ git log --pretty=oneline v3.7..v3.8 
+[stasiu@localhost linux]$ git log --pretty=oneline v3.7..v3.8
 -- drivers/net/wireless/rtl818x/
 fd549f1 rtl8187: remove __dev* attributes
 fb4e899 rtl8187: remove __dev* attributes
@@ -215,12 +236,51 @@ f4bda33 support RX_FLAG_MACTIME_END
 -----------
 
 None of them can be responsible for this bug. This seems to be problem in other subsystem like USB or network. The only way to move this bug forward is probably bisection.
-________
+_______
 
-#4: Created +loongson-sources+
--------------------------------
+----------------
+➜  linux git:(51d943f) ✗ git bisect good
+a16dad7763420a3b46cff1e703a9070827796cfc is the first bad commit
+commit a16dad7763420a3b46cff1e703a9070827796cfc
+Author: Ralf Baechle <ralf@linux-mips.org>
+Date:   Sat Jun 9 20:48:47 2012 +0100
+
+    MIPS: Fix potencial corruption
+----------------
+
+rtl8187: fix regression on MIPS without coherent DMA
+
+----------------
+    Reported-by: Petr Pisar <petr.pisar@atlas.cz>
+    Bisected-by: Tom Li <biergaizi2009@gmail.com>
+    Reported-and-tested-by: Tom Li <biergaizi2009@gmail.com>
+    Signed-off-by: Stanislaw Gruszka <stf_xl@wp.pl>
+    Acked-by: Larry Finger <Larry.Finger@lwfinger.next>
+    Acked-by: Hin-Tak Leung <htl10@users.sourceforge.net>
+    Signed-off-by: John W. Linville <linville@tuxdriver.com>
+    Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+---------------
+
+
+#4: +loongson-sources+
+----------------------
 
 A kernel with many patches for yeeloong 8089D users.
+
++http://github.com/biergaizi/loongson-sources+
+
+[role="incremental"]
+- Disabled many useless kernel features
+- Genpatches
+- BFQ
+- UKSM
+- CJKtty
+- exfat-nofuse
+- BFS
+- YeeLoong 8089D Power Management
+- Hotfixes
+- Compiled by GCC 4.8.1
+
 
 More RAM
 --------
@@ -245,23 +305,42 @@ Fixup PMON
 
 But it can't be done without a EEPROM programmer. I'll buy one next week.
 
-Implementing the (correct) 2D acceleration
-------------------------------------------
+Fixup 2D acceleration
+----------------------
 
-NetBSD has a implementation. may help.
+[quote]
+______________
+It may make the whole system hang when scrolling the screen, for example, if we
+ copy some files from another machines to yeeloong via scp and the screeoutput
+is enabled, the whole system may hang.
+______________
 
-Debugging +xf86-video-siliconmotion+
--------------------------------------
+So, the 2D acceleration had been removed.
 
-Using SSH? No.
-
-Resyncing the decoder written in assmebly for LibAV/FFmpeg
------------------------------------------------------------
-
-I don't know LibAV build system well. I can not link them...
+TIP: NetBSD/OpenBSD have a elegant implementation.
 
 Others
 -------
 
-Remove `march=loongson2f` fix it. Really a problem?
+- Debug +xf86-video-siliconmotion+
+  * It is always freeze and lockup the whole system including kernel, and/or cause kernel panic.
 
+TIP: There is a serial port on the motherboard. But it seems unusable without soldering.
+
+- Resync the decoder written in assmebly for latest LibAV/FFmpeg.
+  * I don't know LibAV build system well. I can not link the assmebly code successfully...
+
+- Fixup Webkit.
+  * Can't get rid of +segfault+ now.
+
+- Fixup Virtualenv.
+  * Virtualenv is unusable on Gentoo MIPS N32, preventing us to build Firefox.
+
+- More things need to fix.
+  * I forgot them.
+
+
+Thanks
+-------
+
+Questions?
