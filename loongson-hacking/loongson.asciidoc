@@ -65,7 +65,6 @@ image::images/loongson-2f.jpg["Loongson 2F CPU", width=256, float="right"]
 
 - Bug
 
-
 The Laptop
 ------------
 
@@ -94,6 +93,19 @@ image::images/8089d.jpg["YeeLoong 8089D", width=300, float="right"]
   * Bug
 
 - 20 W max.
+
+
+Benchmark
+----------
+
+[width="75%"]
+|======================
+| Benchmarks / Devices| Dhrystone | Whetstone | LINPACK
+| Raspberry Pi | 1483680 per second | 625.0 MIPS | 40481.827 KFLOPS
+| YeeLoong 8089D | 2500000 per second | 1052.6 MIPS | 309483.568 KFLOPS
+|=======================
+
+TIP: 建议树莓派向跑分宇宙第一的小米手机学习。
 
 
 BIOS/Bootloader
