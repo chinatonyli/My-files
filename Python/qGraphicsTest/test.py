@@ -78,13 +78,6 @@ class MainWindow(QtGui.QGraphicsView):
         avatarLayout.setAlignment(text, Qt.AlignCenter)
 
         avatarWidget = QtGui.QGraout.setContentsMargins(0, 0, 0, 0)
-        self.mainLayout.setSpacing(0)
-
-        self.avatar = self._avatar()
-        self.mainLayout.addItem(self.avatar)
-        self.mainLayout.setAlignment(self.avatar, Qt.AlignCenter)
-
-        self.text = selfphicsWidget()
         avatarWidget.setWindowFrameMargins(0, 0, 0, 0)
         avatarWidget.setContentsMargins(0, 0, 0, 0)
         avatarWidget.setLayout(avatarLayout)
