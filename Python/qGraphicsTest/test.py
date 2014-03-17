@@ -41,25 +41,25 @@ class MainWindow(QtGui.QGraphicsView):
     def __init__(self, parent=None):
         super(MainWindow, self).__init__(parent)
 
-        mainLayout = QtGui.QGraphicsLinearLayout()
-        mainLayout.setContentsMargins(0, 0, 0, 0)
-        mainLayout.setSpacing(0)
+        self.mainLayout = QtGui.QGraphicsLinearLayout()
+        self.mainLayout.setContentsMargins(0, 0, 0, 0)
+        self.mainLayout.setSpacing(0)
 
-        avatar = self._avatar()
-        mainLayout.addItem(avatar)
-        mainLayout.setAlignment(avatar, Qt.AlignCenter)
+        self.avatar = self._avatar()
+        self.mainLayout.addItem(self.avatar)
+        self.mainLayout.setAlignment(self.avatar, Qt.AlignCenter)
 
-        text = self._text()
-        mainLayout.addItem(text)
-        mainLayout.setAlignment(text, Qt.AlignCenter)
+        self.text = self._text()
+        self.mainLayout.addItem(self.text)
+        self.mainLayout.setAlignment(self.text, Qt.AlignCenter)
 
-        mainWidget = QtGui.QGraphicsWidget()
-        mainWidget.setContentsMargins(0, 0, 0, 0)
-        mainWidget.setLayout(mainLayout)
-        
-        scene = QtGui.QGraphicsScene()
-        scene.addItem(mainWidget)
-        self.setScene(scene)
+        self.mainWidget = QtGui.QGraphicsWidget()
+        self.mainWidget.setContentsMargins(0, 0, 0, 0)
+        self.mainWidget.setLayout(self.mainLayout)
+
+        self.scene = QtGui.QGraphicsScene(self.mainWidget)
+        self.scene.addItem(self.mainWidget)
+        self.setScene(self.scene)
 
     @staticmethod
     def _avatar():
@@ -77,7 +77,14 @@ class MainWindow(QtGui.QGraphicsView):
         avatarLayout.addItem(text)
         avatarLayout.setAlignment(text, Qt.AlignCenter)
 
-        avatarWidget = QtGui.QGraphicsWidget()
+        avatarWidget = QtGui.QGraout.setContentsMargins(0, 0, 0, 0)
+        self.mainLayout.setSpacing(0)
+
+        self.avatar = self._avatar()
+        self.mainLayout.addItem(self.avatar)
+        self.mainLayout.setAlignment(self.avatar, Qt.AlignCenter)
+
+        self.text = selfphicsWidget()
         avatarWidget.setWindowFrameMargins(0, 0, 0, 0)
         avatarWidget.setContentsMargins(0, 0, 0, 0)
         avatarWidget.setLayout(avatarLayout)
