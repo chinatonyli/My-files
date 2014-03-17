@@ -77,7 +77,7 @@ class MainWindow(QtGui.QGraphicsView):
         avatarLayout.addItem(text)
         avatarLayout.setAlignment(text, Qt.AlignCenter)
 
-        avatarWidget = QtGui.QGraout.setContentsMargins(0, 0, 0, 0)
+        avatarWidget = QtGui.QGraphicsWidget()
         avatarWidget.setWindowFrameMargins(0, 0, 0, 0)
         avatarWidget.setContentsMargins(0, 0, 0, 0)
         avatarWidget.setLayout(avatarLayout)
